@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__video">
+    <img src="https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=1920&q=80" alt="Water park slides" />
+  </div>
+  <div class="hero__inner container">
+    <span class="hero__badge">🌊 #1 Family Water Park in Sunshine Bay</span>
+    <h1>Dive Into <span>Fun &amp; Adventure</span></h1>
+    <p>Experience thrilling slides, crystal-clear pools, rain dance, and unforgettable family fun — all in one splash-tastic destination.</p>
+    <div class="hero__cta">
+      <a href="{{ url_for('booking') }}" class="btn btn--sun">🎟️ Book Tickets</a>
+      <a href="{{ url_for('attractions') }}" class="btn btn--ghost">Explore Attractions →</a>
+    </div>
+    <div class="hero__stats">
+      <div><div class="num">25+</div><small>Attractions</small></div>
+      <div><div class="num">8</div><small>Pools &amp; Slides</small></div>
+      <div><div class="num">4.9★</div><small>Visitor Rating</small></div>
+    </div>
+  </div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<!-- TICKET PRICING -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="head reveal">
+      <span class="eyebrow">Best Value</span>
+      <h2>Ticket Pricing</h2>
+      <p>Simple, all-inclusive pricing. Every ticket includes access to all pools, slides and the rain dance zone.</p>
+    </div>
+    <div class="alert alert--warn reveal center">⏳ Limited pool slots available — weekends are filling up fast!</div>
+    <div class="grid grid--4">
+      <div class="price-card reveal"><div class="emoji">🧍</div><h3>Adult</h3><div class="price">₹{{ prices.adult }}<small>/day</small></div><ul><li>All slides &amp; pools</li><li>Rain dance zone</li><li>Free parking</li></ul><a href="{{ url_for('booking') }}" class="btn btn--outline btn--block">Book</a></div>
+      <div class="price-card featured reveal"><div class="emoji">👨‍👩‍👧‍👦</div><h3>Family Pack</h3><div class="price">₹{{ prices.family }}<small>/day</small></div><ul><li>2 Adults + 2 Kids</li><li>Priority slide lanes</li><li>Free locker + towel</li></ul><a href="{{ url_for('booking') }}" class="btn btn--sun btn--block">Best Deal</a></div>
+      <div class="price-card reveal"><div class="emoji">🧒</div><h3>Kids</h3><div class="price">₹{{ prices.kid }}<small>/day</small></div><ul><li>Kids pool &amp; splash zone</li><li>Mini slides</li><li>Supervised play</li></ul><a href="{{ url_for('booking') }}" class="btn btn--outline btn--block">Book</a></div>
+      <div class="price-card reveal"><div class="emoji">🎒</div><h3>School Group</h3><div class="price">₹{{ prices.school }}<small>/student</small></div><ul><li>Min. 20 students</li><li>Dedicated host</li><li>Lunch add-on</li></ul><a href="{{ url_for('booking') }}" class="btn btn--outline btn--block">Enquire</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- WATER ATTRACTIONS -->
+<section class="section">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Make a Splash</span><h2>Water Attractions</h2><p>From adrenaline-pumping slides to relaxing lazy rivers — there's something for every age.</p></div>
+    <div class="grid grid--3">
+      {% for a in attractions %}
+      <article class="attr-card reveal">
+        <div class="attr-card__img"><span class="attr-card__tag">{{ a.tag }}</span><img src="{{ a.img }}" alt="{{ a.name }}" loading="lazy" /></div>
+        <div class="attr-card__body"><h3>{{ a.name }}</h3><p>{{ a.desc }}</p></div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="center mt"><a href="{{ url_for('attractions') }}" class="btn btn--primary">View All Attractions →</a></div>
+  </div>
+</section>
+
+<!-- SWIMMING POOL -->
+<section class="section section--tint">
+  <div class="container split">
+    <div class="reveal"><img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?auto=format&fit=crop&w=900&q=80" alt="Swimming pool" /></div>
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--aqua);font-weight:800;text-transform:uppercase">Swim &amp; Train</span>
+      <h2>World-Class Swimming Pools</h2>
+      <p class="lead">Olympic-grade lanes, warm family pools and certified coaching for all levels — backed by lifeguards at every corner.</p>
+      <ul class="pill-list">
+        <li><b>Coaching:</b> Beginner to advanced swim classes</li>
+        <li><b>Private hire:</b> Book the pool for your group</li>
+        <li><b>Memberships:</b> Unlimited monthly access</li>
+      </ul>
+      <div class="mt"><a href="{{ url_for('pool') }}" class="btn btn--primary">Explore the Pool →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTERS -->
+<section class="section section--ocean">
+  <div class="container">
+    <div class="counters">
+      <div class="counter reveal"><div class="num" data-count="500000" data-suffix="+">0</div><small>Happy Visitors / Year</small></div>
+      <div class="counter reveal"><div class="num" data-count="25">0</div><small>Attractions</small></div>
+      <div class="counter reveal"><div class="num" data-count="45">0</div><small>Certified Lifeguards</small></div>
+      <div class="counter reveal"><div class="num" data-count="12">0</div><small>Years of Fun</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section class="section">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Splash More, Pay Less</span><h2>Membership Plans</h2><p>Become a member and enjoy unlimited fun, exclusive perks and member-only events all year round.</p></div>
+    <div class="member-grid">
+      {% for m in memberships %}
+      <div class="price-card reveal {% if m.featured %}featured{% endif %}">
+        {% if m.featured %}<div class="attr-card__tag" style="position:static;display:inline-block;margin-bottom:.6rem">Most Popular</div>{% endif %}
+        <h3>{{ m.name }}</h3>
+        <div class="price">₹{{ m.price }}<small>/{{ m.period }}</small></div>
+        <ul>{% for p in m.perks %}<li>{{ p }}</li>{% endfor %}</ul>
+        <a href="{{ url_for('pool') }}#join" class="btn {% if m.featured %}btn--sun{% else %}btn--outline{% endif %} btn--block">Join {{ m.name }}</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES (Family + School) -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Group Fun</span><h2>Family &amp; School Packages</h2></div>
+    <div class="grid grid--2">
+      <div class="tile reveal"><div class="ico">👨‍👩‍👧‍👦</div><h3>Family Packages</h3><p>All-day fun for the whole family with priority lanes, reserved cabanas, meal vouchers and free lockers. Kids under 3 enter free.</p><a href="{{ url_for('booking') }}" class="btn btn--outline btn--sm mt">Book Family Pack</a></div>
+      <div class="tile reveal"><div class="ico">🎒</div><h3>School Trip Packages</h3><p>Safe, supervised and educational. Dedicated hosts, segregated zones, packed lunches and special group rates for 20+ students.</p><a href="{{ url_for('booking') }}" class="btn btn--outline btn--sm mt">Plan a School Trip</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY PREVIEW -->
+<section class="section">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Moments</span><h2>Gallery Preview</h2></div>
+    <div class="grid grid--4">
+      {% for src,cat in gallery %}
+      <figure class="reveal" style="border-radius:16px;overflow:hidden;box-shadow:var(--shadow)"><img src="{{ src }}" alt="{{ cat }}" loading="lazy" style="height:180px;width:100%;object-fit:cover"></figure>
+      {% endfor %}
+    </div>
+    <div class="center mt"><a href="{{ url_for('gallery') }}" class="btn btn--primary">Open Full Gallery →</a></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Loved by Families</span><h2>What Our Visitors Say</h2></div>
+    <div class="reviews">
+      {% for r in reviews %}
+      <div class="review">
+        <div class="stars">{{ "★" * r.stars }}{{ "☆" * (5 - r.stars) }}</div>
+        <p>"{{ r.text }}"</p>
+        <div class="who"><div class="avatar">{{ r.name[0] }}</div><div><b>{{ r.name }}</b><br><small>{{ r.role }}</small></div></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY & HYGIENE -->
+<section class="section">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Your Safety First</span><h2>Safety &amp; Hygiene</h2><p>Your wellbeing is our top priority — every single day.</p></div>
+    <div class="grid grid--4">
+      <div class="tile reveal"><div class="ico">🛟</div><h3>Trained Lifeguards</h3><p>45+ certified lifeguards stationed at every pool and slide.</p></div>
+      <div class="tile reveal"><div class="ico">📹</div><h3>24/7 CCTV</h3><p>Full park surveillance for a secure, worry-free visit.</p></div>
+      <div class="tile reveal"><div class="ico">💧</div><h3>Clean Water</h3><p>Advanced filtration with water tested every 2 hours.</p></div>
+      <div class="tile reveal"><div class="ico">🧴</div><h3>Hygiene Stations</h3><p>Sanitisers, clean changing rooms and daily deep cleaning.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--tint">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Good to Know</span><h2>Frequently Asked Questions</h2></div>
+    <div class="faq reveal">
+      {% for q,a in faqs %}
+      <div class="faq__item"><button class="faq__q">{{ q }} <span>+</span></button><div class="faq__a"><p>{{ a }}</p></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="section section--ocean">
+  <div class="container center reveal">
+    <h2>Ready to Make a Splash? 🌊</h2>
+    <p style="max-width:540px;margin:.8rem auto 1.6rem">Book your tickets online today and get <strong>20% off</strong> your first family visit.</p>
+    <a href="{{ url_for('booking') }}" class="btn btn--sun">🎟️ Book Now &amp; Save 20%</a>
+  </div>
+</section>
+
+{% endblock %}
