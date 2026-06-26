@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}About Us · {{ site.name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container"><h1>About {{ site.name }}</h1><p>Twelve years of splashes, smiles and unforgettable family memories.</p></div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<section class="section section--tint">
+  <div class="container split">
+    <div class="reveal"><img src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=900&q=80" alt="Families enjoying the park"></div>
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--aqua);font-weight:800;text-transform:uppercase">Our Story</span>
+      <h2>Where Every Day Feels Like a Holiday</h2>
+      <p class="lead">Born in 2014 from a simple dream — to create a place where families could escape, play and reconnect — AquaVerse has grown into Sunshine Bay's most-loved water park and resort.</p>
+      <p style="color:var(--muted);margin-top:1rem">Today we welcome over half a million visitors each year across 25+ attractions, eight pools and a world-class events calendar, all wrapped in award-winning safety and hygiene standards.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--2">
+      <div class="tile reveal"><div class="ico">🎯</div><h3>Our Mission</h3><p>To deliver safe, joyful, world-class aquatic experiences that bring families and communities together — one splash at a time.</p></div>
+      <div class="tile reveal"><div class="ico">🔭</div><h3>Our Vision</h3><p>To be the most trusted and loved family water destination, setting the global benchmark for fun, safety and sustainability.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ocean">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Built on Trust</span><h2>Safety Standards</h2></div>
+    <div class="grid grid--4">
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">🛟</div><h3 style="color:#fff">Lifeguards</h3><p style="color:rgba(255,255,255,.9)">45+ internationally certified lifeguards on rotating watch.</p></div>
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">📹</div><h3 style="color:#fff">CCTV</h3><p style="color:rgba(255,255,255,.9)">Park-wide monitoring with a 24/7 control room.</p></div>
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">🚑</div><h3 style="color:#fff">Medical Team</h3><p style="color:rgba(255,255,255,.9)">On-site first-aid and trained paramedics every day.</p></div>
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">✅</div><h3 style="color:#fff">Certified</h3><p style="color:rgba(255,255,255,.9)">Audited annually to exceed national safety codes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container split">
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--aqua);font-weight:800;text-transform:uppercase">Sparkling Clean</span>
+      <h2>Cleanliness &amp; Maintenance</h2>
+      <p class="lead">Our water is filtered continuously and tested every two hours. Decks, lockers and changing rooms are deep-cleaned daily by a dedicated 30-person crew.</p>
+      <ul class="pill-list">
+        <li><b>Every 2 hrs:</b> Water quality testing</li>
+        <li><b>Daily:</b> Deep cleaning &amp; sanitisation</li>
+        <li><b>Eco:</b> Solar heating &amp; water recycling</li>
+      </ul>
+    </div>
+    <div class="reveal"><img src="https://images.unsplash.com/photo-1551918120-9739cb430c6d?auto=format&fit=crop&w=900&q=80" alt="Clean pool"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">The People</span><h2>Our Staff &amp; Lifeguard Team</h2><p>Friendly, trained and always ready to help you have the best day.</p></div>
+    <div class="grid grid--3">
+      <div class="tile reveal center"><div class="ico">🛟</div><h3>Lifeguards</h3><p>Vigilant water-safety experts trained in rescue and CPR.</p></div>
+      <div class="tile reveal center"><div class="ico">🏊</div><h3>Swim Coaches</h3><p>Certified instructors for all ages and skill levels.</p></div>
+      <div class="tile reveal center"><div class="ico">🤝</div><h3>Guest Hosts</h3><p>Your guides to packages, events and a seamless visit.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Recognised</span><h2>Awards &amp; Recognition</h2></div>
+    <div class="grid grid--4">
+      <div class="tile reveal center"><div class="ico">🏆</div><h3>Best Family Park</h3><p>Sunshine Bay Tourism, 2024</p></div>
+      <div class="tile reveal center"><div class="ico">🥇</div><h3>Safety Excellence</h3><p>National Aquatics Board, 2023</p></div>
+      <div class="tile reveal center"><div class="ico">🌿</div><h3>Green Resort</h3><p>Eco Leisure Awards, 2023</p></div>
+      <div class="tile reveal center"><div class="ico">⭐</div><h3>4.9 / 5 Rated</h3><p>50,000+ visitor reviews</p></div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}Book Tickets · {{ site.name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container"><h1>Book Your Tickets</h1><p>Reserve online in under a minute and save 20% — limited slots available!</p></div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="alert alert--warn reveal center">⏳ Limited pool slots available for this weekend — book now to secure your spot!</div>
+    <div class="split" style="align-items:start">
+
+      <!-- Calculator + form -->
+      <div class="reveal">
+        <div class="calc" id="calc" data-prices='{"adult":{{ prices.adult }},"kid":{{ prices.kid }},"senior":{{ prices.senior }}}'>
+          <h3 style="color:var(--ocean);margin-bottom:.5rem">🎟️ Ticket Calculator</h3>
+          <div class="calc__row">
+            <div class="calc__label"><b>Adult</b><small>₹{{ prices.adult }} / person</small></div>
+            <div class="stepper"><button data-step="adult" data-dir="-1">−</button><span data-count-for="adult">2</span><button data-step="adult" data-dir="1">+</button></div>
+          </div>
+          <div class="calc__row">
+            <div class="calc__label"><b>Kid (4–12)</b><small>₹{{ prices.kid }} / person</small></div>
+            <div class="stepper"><button data-step="kid" data-dir="-1">−</button><span data-count-for="kid">1</span><button data-step="kid" data-dir="1">+</button></div>
+          </div>
+          <div class="calc__row">
+            <div class="calc__label"><b>Senior (60+)</b><small>₹{{ prices.senior }} / person</small></div>
+            <div class="stepper"><button data-step="senior" data-dir="-1">−</button><span data-count-for="senior">0</span><button data-step="senior" data-dir="1">+</button></div>
+          </div>
+          <div class="calc__total"><span>Total</span><span id="calcTotal">₹0</span></div>
+          <small style="color:var(--muted)">Children under 3 enter free. Prices include all pools, slides &amp; rain dance.</small>
+        </div>
+      </div>
+
+      <!-- Visit details + payment -->
+      <div class="reveal">
+        <form class="form-card form" id="bookingForm" data-api="/api/book">
+          <h3 style="color:var(--ocean)">Visit Details</h3>
+          <div class="row">
+            <div><label>Full Name</label><input name="name" required placeholder="Jane Doe"></div>
+            <div><label>Phone</label><input name="phone" required placeholder="+1 555 000 0000"></div>
+          </div>
+          <div><label>Email</label><input type="email" name="email" required placeholder="jane@email.com"></div>
+          <div class="row">
+            <div><label>Visit Date</label><input type="date" name="date" required></div>
+            <div><label>Time Slot</label>
+              <select name="slot" required>
+                <option value="">Choose a slot</option>
+                <option>09:00 AM – 1:00 PM</option>
+                <option>01:00 PM – 5:00 PM</option>
+                <option>05:00 PM – 8:00 PM (Night)</option>
+                <option>Full Day Access</option>
+              </select>
+            </div>
+          </div>
+          <div><label>Package Type</label>
+            <select name="package">
+              <option>Standard Day Pass</option>
+              <option>Family Package</option>
+              <option>Group Booking (10+)</option>
+              <option>School Picnic</option>
+            </select>
+          </div>
+
+          <h3 style="color:var(--ocean);margin-top:.6rem">Payment Method</h3>
+          <div class="pay-tabs" role="tablist">
+            <button type="button" class="pay-tab active" data-pay="upi">📱 UPI</button>
+            <button type="button" class="pay-tab" data-pay="card">💳 Card</button>
+          </div>
+
+          <!-- UPI -->
+          <div class="pay-panel" data-panel="upi">
+            <div><label>Your UPI ID (optional)</label><input name="upi_id" placeholder="yourname@okbank"></div>
+            <div class="upi-apps">
+              <span class="upi-app">📲 GPay</span>
+              <span class="upi-app">🟣 PhonePe</span>
+              <span class="upi-app">💙 Paytm</span>
+              <span class="upi-app">🏦 BHIM</span>
+            </div>
+            <div class="upi-qr">
+              <div class="upi-qr__box"><img id="upiQr" src="{{ url_for('upi_qr') }}?amount=0" alt="UPI QR code" width="120" height="120" data-base="{{ url_for('upi_qr') }}" data-vpa="{{ upi.vpa }}" data-pn="{{ upi.name }}"></div>
+              <div>
+                <b>Scan &amp; Pay to {{ upi.vpa }}</b><br>
+                <small style="color:var(--muted)">Scan with any UPI app, or tap below on mobile.</small>
+                <a id="upiLink" class="btn btn--sun btn--sm mt" href="#">📱 Pay in UPI App</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card -->
+          <div class="pay-panel" data-panel="card" hidden>
+            <div><label>Card Number</label><input name="card" inputmode="numeric" placeholder="4242 4242 4242 4242"></div>
+            <div class="row">
+              <div><label>Expiry</label><input name="exp" placeholder="MM/YY"></div>
+              <div><label>CVV</label><input name="cvv" inputmode="numeric" placeholder="123"></div>
+            </div>
+          </div>
+
+          <input type="hidden" name="payment_method" id="paymentMethod" value="upi">
+          <button class="btn btn--primary btn--block" type="submit">🔒 Confirm &amp; Pay</button>
+          <small style="color:var(--muted);text-align:center">Demo only — no real payment is processed. No money is charged.</small>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Group / school -->
+<section class="section">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Bringing a Crowd?</span><h2>Group &amp; School Bookings</h2></div>
+    <div class="grid grid--2">
+      <div class="tile reveal"><div class="ico">👥</div><h3>Group Booking</h3><p>Special rates for parties of 10 or more. Reserved cabanas, meal bundles and a dedicated coordinator.</p></div>
+      <div class="tile reveal"><div class="ico">🎒</div><h3>School Picnic</h3><p>From ₹{{ prices.school }}/student (min. 20). Safe segregated zones, supervised activities and packed lunches.</p></div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+  document.querySelector('input[type=date]').min = new Date().toISOString().split('T')[0];
+
+  // Payment method tabs (UPI / Card)
+  const tabs = document.querySelectorAll('.pay-tab');
+  const panels = document.querySelectorAll('.pay-panel');
+  const hidden = document.getElementById('paymentMethod');
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const pay = tab.dataset.pay;
+    hidden.value = pay;
+    panels.forEach(p => p.hidden = (p.dataset.panel !== pay));
+  }));
+</script>
+{% endblock %}

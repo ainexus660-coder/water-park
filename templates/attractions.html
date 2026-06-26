@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Attractions · {{ site.name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container"><h1>Our Attractions</h1><p>Eight signature water experiences engineered for thrills, splashes and pure family joy.</p></div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="alert reveal center">🌊 Every attraction is supervised by certified lifeguards — please read the safety notes on each card.</div>
+    <div class="grid grid--3">
+      {% for a in attractions %}
+      <article class="attr-card reveal">
+        <div class="attr-card__img"><span class="attr-card__tag">{{ a.tag }}</span><img src="{{ a.img }}" alt="{{ a.name }}" loading="lazy"></div>
+        <div class="attr-card__body">
+          <h3>{{ a.name }}</h3>
+          <p>{{ a.desc }}</p>
+          <div class="attr-card__safety"><b>⚠️ Safety</b>{{ a.safety }}</div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="center mt"><a href="{{ url_for('booking') }}" class="btn btn--primary">🎟️ Book Your Tickets</a></div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Contact · {{ site.name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container"><h1>Get In Touch</h1><p>Questions, bookings or directions — we're here to help you plan the perfect splash day.</p></div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<section class="section section--tint">
+  <div class="container split" style="align-items:start">
+    <div class="reveal">
+      <h2 style="color:var(--ocean)">Contact Details</h2>
+      <ul class="pill-list mt">
+        <li><b>📍 Address:</b> {{ site.address }}</li>
+        <li><b>📞 Phone:</b> <a href="tel:{{ site.phone }}">{{ site.phone }}</a></li>
+        <li><b>✉️ Email:</b> <a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        <li><b>💬 WhatsApp:</b> <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener">Chat with us</a></li>
+        <li><b>⏰ Opening Hours:</b> {{ site.hours }}</li>
+      </ul>
+      <a href="https://wa.me/{{ site.whatsapp }}" target="_blank" rel="noopener" class="btn btn--sun mt">💬 Message on WhatsApp</a>
+      <div class="mt" style="border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)">
+        <iframe title="AquaVerse location" width="100%" height="280" style="border:0;display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-118.5%2C33.9%2C-118.2%2C34.1&layer=mapnik&marker=34.0%2C-118.35"></iframe>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="form-card form" data-api="/api/inquiry">
+        <h3 style="color:var(--ocean)">Send a Message</h3>
+        <div class="row">
+          <div><label>Name</label><input name="name" required></div>
+          <div><label>Phone</label><input name="phone" required></div>
+        </div>
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Subject</label>
+          <select name="subject"><option>General enquiry</option><option>Ticket booking</option><option>Membership</option><option>Events</option><option>Feedback</option></select>
+        </div>
+        <div><label>Message</label><textarea name="message" required></textarea></div>
+        <button class="btn btn--primary btn--block" type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Extra facility sections -->
+<section class="section">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Facilities</span><h2>Everything You Need On-Site</h2></div>
+    <div class="grid grid--3">
+      <div class="tile reveal"><div class="ico">🍔</div><h3>Food Court</h3><p>From fresh salads to burgers, pizza and ice cream — 12 outlets to fuel your fun.</p></div>
+      <div class="tile reveal"><div class="ico">🔐</div><h3>Lockers</h3><p>Hundreds of secure digital lockers in multiple sizes near every pool.</p></div>
+      <div class="tile reveal"><div class="ico">🚿</div><h3>Changing Rooms</h3><p>Spacious, clean changing rooms with hot showers and family cubicles.</p></div>
+      <div class="tile reveal"><div class="ico">🅿️</div><h3>Parking</h3><p>800+ free spaces including accessible and EV-charging bays.</p></div>
+      <div class="tile reveal"><div class="ico">👕</div><h3>Dress Code</h3><p>Proper swimwear required in all pools. No cotton clothing in the water.</p></div>
+      <div class="tile reveal"><div class="ico">🌤️</div><h3>Weather Today</h3><p id="weather">Sunny · 29°C · Perfect splash weather!</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Good to Know</span><h2>Frequently Asked Questions</h2></div>
+    <div class="faq reveal">
+      {% for q,a in faqs %}
+      <div class="faq__item"><button class="faq__q">{{ q }} <span>+</span></button><div class="faq__a"><p>{{ a }}</p></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+{% block scripts %}
+<script>
+// Lightweight "weather widget" demo — randomises a friendly forecast.
+(function(){
+  const w=['☀️ Sunny · 29°C','⛅ Partly cloudy · 26°C','🌤️ Warm · 31°C','🌥️ Mild · 24°C'];
+  const el=document.getElementById('weather');
+  if(el) el.textContent = w[Math.floor(Math.random()*w.length)] + ' · Perfect splash weather!';
+})();
+</script>
+{% endblock %}

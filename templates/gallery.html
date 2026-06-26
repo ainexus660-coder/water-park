@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Gallery · {{ site.name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container"><h1>Photo Gallery</h1><p>Slides, pools, family fun, events and electric night pool parties.</p></div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="gallery-filter reveal">
+      <button class="active" data-cat="all">All</button>
+      <button data-cat="Slides">Water Slides</button>
+      <button data-cat="Pools">Pools</button>
+      <button data-cat="Family">Family Fun</button>
+      <button data-cat="Events">Events</button>
+      <button data-cat="Night Party">Night Party</button>
+    </div>
+    <div class="gallery-grid reveal">
+      {% for src,cat in gallery %}
+      <figure data-cat="{{ cat }}"><img src="{{ src }}" alt="{{ cat }} photo" loading="lazy"></figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" aria-label="Close">×</button>
+  <button class="lightbox__nav prev" aria-label="Previous">‹</button>
+  <img src="" alt="Gallery image">
+  <button class="lightbox__nav next" aria-label="Next">›</button>
+</div>
+
+{% endblock %}

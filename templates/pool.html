@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Swimming Pool · {{ site.name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container"><h1>Swimming Pools &amp; Classes</h1><p>Olympic lanes, warm family pools, expert coaching and private hire — all year round.</p></div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="grid grid--3">
+      <div class="tile reveal"><div class="ico">🕘</div><h3>Pool Timings</h3><p><b>Mon–Fri:</b> 9 AM – 8 PM<br><b>Sat–Sun:</b> 8 AM – 9 PM<br><b>Lap swim:</b> 6 AM – 8 AM</p></div>
+      <div class="tile reveal"><div class="ico">📏</div><h3>Pool Depths</h3><p><b>Kids:</b> 0.4 m<br><b>Family:</b> 1.2 m<br><b>Deep / lap:</b> 2.0 m</p></div>
+      <div class="tile reveal"><div class="ico">🛟</div><h3>Always Supervised</h3><p>Certified lifeguards on duty during every open hour, at every pool.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split">
+    <div class="reveal"><img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?auto=format&fit=crop&w=900&q=80" alt="Pool lanes"></div>
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--aqua);font-weight:800;text-transform:uppercase">Learn to Swim</span>
+      <h2>Coaching &amp; Swimming Classes</h2>
+      <p class="lead">From your very first float to competitive technique, our certified coaches run small-group and one-to-one classes for all ages.</p>
+      <ul class="pill-list">
+        <li><b>Tots (3–5):</b> Water confidence &amp; play</li>
+        <li><b>Juniors (6–14):</b> Stroke technique &amp; safety</li>
+        <li><b>Adults:</b> Beginner to advanced lanes</li>
+        <li><b>Private:</b> 1-to-1 personalised coaching</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ocean">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Pool Rules</span><h2>For Everyone's Safety</h2></div>
+    <div class="grid grid--4">
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">🚿</div><p style="color:#fff">Shower before entering the pool</p></div>
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">👕</div><p style="color:#fff">Proper swimwear only — no cotton</p></div>
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">🏃</div><p style="color:#fff">No running on the pool deck</p></div>
+      <div class="tile reveal" style="background:rgba(255,255,255,.12);color:#fff"><div class="ico">👶</div><p style="color:#fff">Children must be supervised</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Membership + private booking -->
+<section class="section section--tint" id="join">
+  <div class="container split" style="align-items:start">
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--aqua);font-weight:800;text-transform:uppercase">Join the Club</span>
+      <h2>Monthly Membership</h2>
+      <p class="lead">Unlimited pool access, member-only hours and exclusive perks. Cancel anytime.</p>
+      <div class="grid" style="margin-top:1.4rem">
+        {% for m in memberships %}
+        <div class="tile" style="display:flex;justify-content:space-between;align-items:center">
+          <div><h3 style="margin:0">{{ m.name }} — ₹{{ m.price }}/{{ m.period }}</h3><small style="color:var(--muted)">{{ m.perks|join(' · ') }}</small></div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="form-card form" data-api="/api/membership">
+        <h3 style="color:var(--ocean)">Membership Registration</h3>
+        <div><label>Full Name</label><input name="name" required placeholder="Jane Doe"></div>
+        <div class="row">
+          <div><label>Email</label><input type="email" name="email" required></div>
+          <div><label>Phone</label><input name="phone" required></div>
+        </div>
+        <div><label>Choose Plan</label>
+          <select name="plan">{% for m in memberships %}<option>{{ m.name }} (₹{{ m.price }}/{{ m.period }})</option>{% endfor %}</select>
+        </div>
+        <div><label>Interested In</label>
+          <select name="interest"><option>Open swim</option><option>Swimming classes</option><option>Private pool booking</option><option>Lap training</option></select>
+        </div>
+        <button class="btn btn--primary btn--block" type="submit">Become a Member</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--2">
+      <div class="tile reveal"><div class="ico">🏊‍♀️</div><h3>Private Pool Booking</h3><p>Reserve an entire pool for your family, friends or team. Includes lifeguard, music and optional catering.</p><a href="{{ url_for('events') }}" class="btn btn--outline btn--sm mt">Enquire Now</a></div>
+      <div class="tile reveal"><div class="ico">🏅</div><h3>Competitive Squad</h3><p>Join our junior and adult squads with structured training plans and inter-club galas.</p><a href="{{ url_for('contact') }}" class="btn btn--outline btn--sm mt">Get in Touch</a></div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

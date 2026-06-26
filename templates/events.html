@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Events · {{ site.name }}{% endblock %}
+{% block content %}
+
+<section class="page-hero">
+  <div class="container"><h1>Events &amp; Parties</h1><p>From birthday splashes to neon DJ nights — we host unforgettable celebrations.</p></div>
+</section>
+<div class="wave"><svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="#caf0f8" d="M0,40 C360,90 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,90 L0,90 Z"/></svg></div>
+
+<section class="section section--tint">
+  <div class="container">
+    <div class="head reveal"><span class="eyebrow">Celebrate With Us</span><h2>Event Types</h2></div>
+    <div class="grid grid--3">
+      {% for e in events %}
+      <div class="tile reveal"><div class="ico">{{ e.icon }}</div><h3>{{ e.name }}</h3><p>{{ e.desc }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split" style="align-items:start">
+    <div class="reveal">
+      <span class="eyebrow" style="color:var(--aqua);font-weight:800;text-transform:uppercase">Let's Plan It</span>
+      <h2>Event Inquiry</h2>
+      <p class="lead">Tell us about your event and our team will craft a tailored package within 24 hours.</p>
+      <ul class="pill-list">
+        <li><b>📞 Call:</b> {{ site.phone }}</li>
+        <li><b>✉️ Email:</b> {{ site.email }}</li>
+        <li><b>⏰ Hours:</b> {{ site.hours }}</li>
+      </ul>
+      <img class="mt" src="https://images.unsplash.com/photo-1502780402662-acc01917738e?auto=format&fit=crop&w=900&q=80" alt="Pool party">
+    </div>
+    <div class="reveal">
+      <form class="form-card form" data-api="/api/inquiry">
+        <div class="row">
+          <div><label>Full Name</label><input name="name" required></div>
+          <div><label>Phone</label><input name="phone" required></div>
+        </div>
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div class="row">
+          <div><label>Event Type</label>
+            <select name="type">{% for e in events %}<option>{{ e.name }}</option>{% endfor %}</select>
+          </div>
+          <div><label>Guests</label><input type="number" name="guests" min="1" placeholder="50"></div>
+        </div>
+        <div class="row">
+          <div><label>Preferred Date</label><input type="date" name="date"></div>
+          <div><label>Budget</label>
+            <select name="budget"><option>Under ₹25,000</option><option>₹25,000 – ₹75,000</option><option>₹75,000 – ₹2,50,000</option><option>₹2,50,000+</option></select>
+          </div>
+        </div>
+        <div><label>Tell us more</label><textarea name="message" placeholder="Theme, catering, special requests..."></textarea></div>
+        <button class="btn btn--primary btn--block" type="submit">Send Inquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ocean">
+  <div class="container center reveal">
+    <h2>🌧️ Rain Dance Festival — Every Weekend!</h2>
+    <p style="max-width:540px;margin:.8rem auto 1.6rem">Live DJs, neon lights and tropical showers. Book a private zone for your group today.</p>
+    <a href="#" onclick="document.querySelector('form[data-api]').scrollIntoView({behavior:'smooth'});return false;" class="btn btn--sun">Reserve Your Spot</a>
+  </div>
+</section>
+
+{% endblock %}
